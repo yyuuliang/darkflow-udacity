@@ -96,7 +96,7 @@ class TFNet(object):
 		self.sess.run(tf.global_variables_initializer())
 		# tensorboard
 		self.summary_op = tf.summary.merge_all()
-		sumpath = '/home/notus/Github/yyuuliang/darkflow/tensorboardlogs/'
+		sumpath = '/home/yuhuang/whitebase/darkflow-udacity/tensorboardlogs/'
 		# self.writer = tf.summary.FileWriter(self.FLAGS.summary + 'train')
 		self.writer = tf.summary.FileWriter(sumpath + 'train')
 		self.writer.add_graph(self.sess.graph)

@@ -1,0 +1,10 @@
+ckpt
+udacity
+bin
+test
+img-overfit
+tensorboardlogs
+*/__pycache__
+*/*/__pycache__
+net/yolo/*.parsed
+net/yolo/parse-history.txt

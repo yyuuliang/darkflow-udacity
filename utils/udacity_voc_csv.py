@@ -26,28 +26,28 @@ def udacity_voc_csv(ANN, pick, exclusive = False, test = False):
     dumps = list()
 
     # csv_fname = os.path.join('/home/yan/data/udacity_data/udacity.csv')
-    csv_fname = os.path.join('/home/notus/Github/yyuuliang/darkflow/udacity/udacity-t.csv')
+    csv_fname = os.path.join('/home/yuhuang/whitebase/darkflow-udacity/udacity/labels_overfit_train.csv')
     if test:
         print('load validation csv')
-        csv_fname = os.path.join('/home/notus/Github/yyuuliang/darkflow/udacity/udacity-one.csv')
+        csv_fname = os.path.join('/home/yuhuang/whitebase/darkflow-udacity/udacity/labels_overfit_val.csv')
 
     with open(csv_fname, 'r') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|', )
         for row in spamreader:
-            img_name = row[0]
+            row = row[0].split(',')
+            img_name = row[4]
             w = 1920
             h = 1200
       
-            labels = row[1:]
+            # labels = row[1:]
             all = list()
-            for i in range(0, len(labels), 5):
-                xmin = int(labels[i])
-                ymin = int(labels[i + 1])
-                xmax = int(labels[i + 2])
-                ymax = int(labels[i + 3])
-                class_idx = int(labels[i + 4])
-                class_name = pick[class_idx]
-                all += [[class_name, xmin, ymin, xmax, ymax]]
+            # for i in range(0, len(labels), 5):
+            xmin = int(row[0])
+            ymin = int(row[1])
+            xmax = int(row[2])
+            ymax = int(row[3])
+            class_name = row[5]
+            all += [[class_name, xmin, ymin, xmax, ymax]]
 
             add = [[img_name, [w, h, all]]]
             dumps += add
