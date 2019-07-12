@@ -28,9 +28,9 @@ def findBoxFromCsv(dumps,name):
 	sz = len(dumps)
 	for i in range(0,sz):
 		img = dumps[i][0]
+	# bug fix 
 		if img == name:
-			cvslist = dumps[i][1][2]
-			break
+			cvslist.append(dumps[i][1][2])
 	return cvslist
 
 # from accuracy.py, PO 377, not accepted yet
@@ -137,7 +137,7 @@ def postprocess(self, net_out, im, save = True, dumps=[]):
 		csvlist = findBoxFromCsv(dumps,impath)
 		for i in range(0,len(csvlist)):
 			cbox = csvlist[i]
-			carray = [cbox[1],cbox[2],cbox[3],cbox[4]]
+			carray = [cbox[0][1],cbox[0][2],cbox[0][3],cbox[0][4]]
 			csvbox.append(carray)
 		re_total = len(csvlist)
 
@@ -242,7 +242,7 @@ def postprocess(self, net_out, im, save = True, dumps=[]):
 			cv2.rectangle(imgcvgt, 
 				(left, top), (right, bot), 
 				colors[0], thick)
-			cv2.putText(imgcvgt, csvlist[i][0], (left, top - 12), 
+			cv2.putText(imgcvgt, csvlist[i][0][0], (left, top - 12), 
 				0, 1e-3 * h, colors[3],thick//3)
 
 	if self.FLAGS.loglevel > 0 and self.FLAGS.loggt > 0:
