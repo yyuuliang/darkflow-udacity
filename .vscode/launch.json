@@ -19,9 +19,9 @@
             "pythonPath": "/home/yuhuang/flowsenv/bin/python",
             "cwd":"/home/yuhuang/whitebase/darkflow-udacity/",
             "program": "/home/yuhuang/whitebase/darkflow-udacity/flow",
-            "args": ["--test","test","--model","cfg/tiny-yolo-udacity.cfg","--load","-1","--threshold","0.001","--gpu","0.7"]
+            "args": ["--test","Autti/img-overfit","--model","cfg/tiny-yolo-udacity.cfg","--load","-1","--threshold","0.001","--gpu","0.7"]
         }
-       
+       ,
         {
             "name": "train",
             "type": "python",
@@ -30,7 +30,7 @@
             "pythonPath": "/home/yuhuang/flowsenv/bin/python",
             "cwd":"/home/yuhuang/whitebase/darkflow-udacity/",
             "program": "/home/yuhuang/whitebase/darkflow-udacity/flow",
-            "args": ["--train","--model","cfg/tiny-yolo-udacity.cfg","--load","-1","--dataset","udacity/object-detection-crowdai/","--annotation","udacity"]
+            "args": ["--train","--model","cfg/tiny-yolo-udacity.cfg","--load","bin/tiny-yolo-voc.weights ","--dataset","Autti/object-dataset/","--annotation","udacity"]
         }
        
     ]

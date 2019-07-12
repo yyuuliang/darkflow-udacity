@@ -1,0 +1,9 @@
+{
+    "files.watcherExclude": {
+        "Autti/**": true,
+        "bin/**": true,
+        "cfg/**": true,
+        "ckpt/**": true,
+        "udacity/**": true
+    }
+}

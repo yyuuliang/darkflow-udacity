@@ -1,20 +1,16 @@
 ![img](showcases//1478732802681701702.jpg)
 
 ## Acknowledgment
-The work is originally done by @y22ma  
-the original project is here: https://github.com/y22ma/darkflow  
+The work is originally done by [@y22ma](https://github.com/y22ma/darkflow).    
 
 ## Development Environment
 
-- Ubuntu 16.04 LTS, Python 2.7.12, Tensorflow 1.2.1, NumPy 1.13.1, OpenCV 3.2.0-dev
-- 8 GB GTX 1070 with 2048 CUDA Cores
-- 3.8 GHz i7-7700HQ
-- 32 GB Dual-channel DDR4 at 2400 MHz
-- 512 GB NVMe PCIe M.2 SSD
+- Tensorflow 1.14
+- Python 3.5
 
 ## Quick guide for training(YOLO v2)
 - Download Udacity dataset and csv [here](https://github.com/udacity/self-driving-car/tree/master/annotations). Put both in udacity folder.
-- Download tiny-yolo-voc.weights file [here](https://pjreddie.com/media/files/tiny-yolo-voc.weights). Put it in bin folder.
+- Download tiny-yolo-voc.weights file [here](https://github.com/leetenki/YOLOtiny_v2_chainer/blob/master/tiny-yolo-voc.weights). Put it in bin folder.
 - Change the csv file's location to your own in the following file: 
 ```bash
 # utils/udacity_voc_csv.py: line 29
@@ -22,39 +18,33 @@ csv_fname = os.path.join('/home/notus/Github/yyuuliang/darkflow/udacity/udacity-
 ```
 - Change the TensorBoard log dir
 ```bash
-# I hardcode this in order to have minimal changes to the original code 
 # net/build.py: line 99
 sumpath = '/home/notus/Github/yyuuliang/darkflow/tensorboardlogs/'
 ```
 - Start the training:
 ```bash
-# annotation is actually not used since we hardcode the csv file path.
+# annotation is not used since we hardcode the csv file path.
  python flow --train --model cfg/tiny-yolo-udacity.cfg --load bin/tiny-yolo-voc.weights  --annotation udacity  --dataset udacity/object-dataset/
 ```
 - Recover from previous training checkpoint
 ```bash
-# annotation is actually not used since we hardcode the csv file path
 python flow --train --model cfg/tiny-yolo-udacity.cfg --load -1  --annotation udacity  --dataset udacity/object-dataset/ 
-```
-- Overall, a good example to do the training
-```bash
-# recover from previous checkpoint with lower learning rate
-python flow --train --model cfg/tiny-yolo-udacity.cfg --load -1  --annotation udacity  --dataset udacity/object-dataset/ --gpu 0.8 --batch 16 --lr 0.000005
 ```
 
 ## Quick guide for using detector(YOLO v2)
 - Run the detector
 ```bash
-# "sample_img" is the path of validation images folder
+# "img_folder" is the path of images folder
 # --load -1 will use the lastest checkpoint weights
-python flow  --test sample_img/ --model cfg/tiny-yolo-udacity.cfg --load -1 --threshold 0.4 --gpu 0.7
+python flow  --test img_folder/ --model cfg/tiny-yolo-udacity.cfg --load -1 --threshold 0.4 --gpu 0.7
 ```
+
 ## Quick guide for performance evaluation(YOLO v2)
 - Tensorboard support  
 Tensorboard support is hardcoded and enabled by default. To start tensorboard, run the following cmd.  
 ```bash
-# change the logdir to yours. Until now, TensorBoard supports Scalars and Graphs views.
-tensorboard --logdir="/home/notus/Github/yyuuang/darkflow/tensorboardlogs/train"
+# change the logdir to yours.
+tensorboard --logdir=tensorboardlogs/train
 ```
 ![img](showcases/tensorboard.png)
 If TensorBoard doesn't show any data chart. Change your directory to where your event files are located in the terminal window.
@@ -67,7 +57,6 @@ tensorboard --logdir="train" --inspect
 tensorboard --logdir="train"
 ```
 - Run the detctor with validation csv file. This is used to calculate the performance output.  
-I suggest to use a csv file only contains the validation dataset info. This will greatly enhance the running speed. Because, until now, I use a "loop" to find the picture info in csv file. Yes this is stupid and I will change the code once I have time -_- 
 ```bash
 # utils/udacity_voc_csv.py: line 30
 if test:
@@ -150,22 +139,10 @@ num=5
 ```bash
 net/yolo/parse-history.txt
 ```
-- Currently some setting in cfg don't work. E.g, if you want to change batch size. using the following param
-```bash
---batch 16
-```
-- Use this param to change learning rate
-```bash
---lr 0.00005
-```
-- Reduce the batch size if you have GPU runs out of memory error.
-- Restart the computer to completely clean the GPU usage in previous training sessions.
-- Adjust the GPU param to get a better performance while training
-```bash
---gpu 0.8
-```
+- You can change the training params in ./flow
 
-## Output
-- YOLO v1, model: tiny-yolov1-5c, avg loss: 2.0, threshold: 0.4. Youtube video [here](https://www.youtube.com/watch?v=HjitLEDksFU)
-- YOLO v2, model: tiny-yolo-udacity, avg loss: 6.0, threshold: 0.4. Youtube video [here](https://youtu.be/1fpGU7sUGKI)
+## Code Walkthrough
 
+- utils.udacity_voc_csv.udacity_voc_csv(), this method collect data from csv file and store the ground trutin in dumps
+- utils.helper.load_from_ckpt(), this method load weights from the latest training check point
+- 
