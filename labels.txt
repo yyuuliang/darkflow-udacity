@@ -1,5 +1,5 @@
-Car
-Truck
-Pedestrian
-Street Lights
-Bicycle
+"car"
+"truck"
+"pedestrian"
+"trafficLight"
+"biker"

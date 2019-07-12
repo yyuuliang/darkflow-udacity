@@ -99,6 +99,7 @@ def postprocess(self, net_out, im, save = True, dumps=[]):
 				bx.h = math.exp(bx.h) * anchors[2 * b + 1] / H
 				classes = net_out[row, col, b, 5:]
 				bx.probs = _softmax(classes) * bx.c
+				# if not np.isnan(np.sum(bx.probs)):
 				bx.probs *= bx.probs > threshold
 				boxes.append(bx)
 

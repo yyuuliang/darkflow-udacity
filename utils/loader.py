@@ -80,6 +80,7 @@ class weights_loader(loader):
 class checkpoint_loader(loader):
     """
     one who understands .ckpt files, very much
+    But he does this wrong. this method won't load weights in correct way.
     """
     def load(self, ckpt, ignore):
         meta = ckpt + '.meta'
