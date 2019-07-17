@@ -43,8 +43,8 @@ class Darknet(object):
             if FLAGS.load: self.src_bin = None
             elif not exist: self.src_bin = None
         else:
-            assert os.path.isfile(FLAGS.load), \
-            '{} not found'.format(FLAGS.load)
+            # assert os.path.isfile(FLAGS.load), \
+            # '{} not found'.format(FLAGS.load)
             self.src_bin = FLAGS.load
             name = loader.model_name(FLAGS.load)
             cfg_path = FLAGS.config+name+'.cfg'

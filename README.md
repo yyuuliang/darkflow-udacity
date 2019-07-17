@@ -1,7 +1,7 @@
 ![img](showcases//1478732802681701702.jpg)
 
-## Acknowledgment
-The work is originally done by [@y22ma](https://github.com/y22ma/darkflow).    
+## Introduction
+This project is inspired by [@y22ma](https://github.com/y22ma/darkflow). The purpose of this project is to demenstrate how to train a YOLO model using your own data, and how to evaluate your YOLO model. 
 
 ## Development Environment
 
@@ -145,4 +145,7 @@ net/yolo/parse-history.txt
 
 - utils.udacity_voc_csv.udacity_voc_csv(), this method collect data from csv file and store the ground trutin in dumps
 - utils.helper.load_from_ckpt(), this method load weights from the latest training check point
-- 
+-
+
+## Acknowledgment
+The work is originally done by [@y22ma](https://github.com/y22ma/darkflow).    
